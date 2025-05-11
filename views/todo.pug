@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title To-Do List
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
+  body(class="container mt-5")
+
+    h1.text-center.mb-4 My To-Do List
+
+    .card.shadow.p-4
+      form(action="/add" method="POST" class="d-flex gap-2")
+        input.form-control(type="text" name="item" placeholder="Add a task" required)
+        button.btn.btn-primary(type="submit") Add
+
+    ul.list-group.mt-4
+      each todo, index in todos
+        li.list-group-item.d-flex.justify-content-between.align-items-center
+          span= todo
+          form(action="/delete" method="POST" style="display:inline;")
+            input(type="hidden" name="taskid" value=index)
+            button.btn.btn-danger.btn-sm(type="submit") Done
